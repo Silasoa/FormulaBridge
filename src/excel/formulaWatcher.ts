@@ -12,7 +12,24 @@ const dictionary = dictionaryData as unknown as Dictionary;
 
 // Default target language – will be updated by locale detector
 let targetLanguage: LanguageCode = "en";
+let sourceLanguage: LanguageCode | "auto" = "auto";
 let isEnabled = true;
+
+export interface TranslationLog {
+  address: string;
+  original: string;
+  translated: string;
+  sourceLanguage: LanguageCode;
+  targetLanguage: LanguageCode;
+  confidence: number;
+}
+
+type TranslationCallback = (log: TranslationLog) => void;
+const callbacks: TranslationCallback[] = [];
+
+export function onFormulaTranslated(callback: TranslationCallback): void {
+  callbacks.push(callback);
+}
 
 /**
  * Initialize the formula watcher on the active worksheet.
@@ -51,10 +68,10 @@ async function handleCellChanged(event: Excel.WorksheetChangedEventArgs): Promis
       const sheet = context.workbook.worksheets.getItem(event.worksheetId);
       const range = sheet.getRange(event.address);
 
-      range.load("formulas");
+      range.load("formulasLocal");
       await context.sync();
 
-      const formula = range.formulas[0][0] as string;
+      const formula = range.formulasLocal[0][0] as string;
 
       // Only process formulas (strings starting with =)
       if (typeof formula !== "string" || !formula.startsWith("=")) {
@@ -62,7 +79,8 @@ async function handleCellChanged(event: Excel.WorksheetChangedEventArgs): Promis
       }
 
       // Translate the formula
-      const result = translateFormula(formula, dictionary, targetLanguage);
+      const langParam = sourceLanguage === "auto" ? undefined : sourceLanguage;
+      const result = translateFormula(formula, dictionary, targetLanguage, langParam);
 
       if (!result.wasTranslated) {
         return; // Nothing to translate
@@ -73,17 +91,29 @@ async function handleCellChanged(event: Excel.WorksheetChangedEventArgs): Promis
       await context.sync();
 
       // Write the translated formula
-      range.formulas = [[result.translated]];
+      range.formulasLocal = [[result.translated]];
       await context.sync();
 
       // Re-enable events
       context.runtime.enableEvents = true;
       await context.sync();
 
+      const logInfo: TranslationLog = {
+        address: event.address,
+        original: result.original,
+        translated: result.translated,
+        sourceLanguage: result.sourceLanguage,
+        targetLanguage: result.targetLanguage,
+        confidence: result.confidence
+      };
+
       console.log(
-        `🌉 FormulaBridge: [${event.address}] ${result.original} → ${result.translated} ` +
-        `(${result.sourceLanguage} → ${result.targetLanguage}, confidence: ${(result.confidence * 100).toFixed(0)}%)`
+        `🌉 FormulaBridge: [${logInfo.address}] ${logInfo.original} → ${logInfo.translated} ` +
+        `(${logInfo.sourceLanguage} → ${logInfo.targetLanguage}, confidence: ${(logInfo.confidence * 100).toFixed(0)}%)`
       );
+
+      // Notify UI
+      callbacks.forEach(cb => cb(logInfo));
     });
   } catch (error) {
     console.error("🌉 FormulaBridge: Translation error:", error);
@@ -104,6 +134,13 @@ async function handleCellChanged(event: Excel.WorksheetChangedEventArgs): Promis
  */
 export function setTargetLanguage(lang: LanguageCode): void {
   targetLanguage = lang;
+}
+
+/**
+ * Set the source language override (or "auto" for auto-detect).
+ */
+export function setSourceLanguage(lang: LanguageCode | "auto"): void {
+  sourceLanguage = lang;
 }
 
 /**

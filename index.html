@@ -57,6 +57,20 @@
         </div>
       </section>
 
+      <!-- Copy-Paste Translation Box -->
+      <section class="fb-section">
+        <div class="fb-section-header">
+          <h2 class="fb-section-title">Copy-Paste Translator</h2>
+        </div>
+        <p style="font-size: var(--fb-font-size-xs); color: var(--fb-text-muted); margin-bottom: 8px;">
+          Paste a formula with foreign separators here to insert it safely.
+        </p>
+        <div style="display: flex; gap: var(--fb-space-xs); align-items: stretch;">
+          <input type="text" class="fb-search__input" id="copypaste-input" placeholder="e.g. =SUM(1.5, 2.5)" style="flex: 1;" />
+          <button class="fb-btn-primary" id="copypaste-insert-btn" style="width: auto; padding: 0 var(--fb-space-md);">Insert</button>
+        </div>
+      </section>
+
       <!-- Formula Reference -->
       <section class="fb-section">
         <div class="fb-section-header">
@@ -68,13 +82,6 @@
         <div class="fb-reference" id="formula-reference">
           <!-- Populated dynamically -->
         </div>
-      </section>
-
-      <!-- Batch Translate -->
-      <section class="fb-section">
-        <button class="fb-btn-primary" id="batch-translate-btn">
-          🔄 Translate Entire Sheet
-        </button>
       </section>
     </div>
 

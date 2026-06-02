@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "sideload": "npx office-addin-debugging start manifest.json",
+    "sideload": "npx office-addin-debugging start manifest.xml",
     "build-dict": "node scripts/build-dictionary.js"
   },
   "devDependencies": {

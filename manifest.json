@@ -22,75 +22,73 @@
     "color": "assets/icon-80.png"
   },
   "accentColor": "#4F6BED",
-  "extensions": [
-    {
-      "requirements": {
-        "capabilities": [
-          {
-            "name": "Mailbox",
-            "minVersion": "1.1"
-          }
-        ],
-        "scopes": ["personal"]
-      },
-      "runtimes": [
+  "extensions": {
+    "requirements": {
+      "capabilities": [
         {
-          "id": "TaskPaneRuntime",
-          "type": "general",
-          "code": {
-            "page": "https://localhost:3000/index.html"
-          },
-          "lifetime": "long",
-          "actions": [
-            {
-              "id": "TaskPaneAction",
-              "type": "openPage",
-              "view": "view1"
-            }
-          ]
+          "name": "Workbook",
+          "minVersion": "1.1"
         }
       ],
-      "ribbons": [
-        {
-          "contexts": ["default"],
-          "tabs": [
-            {
-              "id": "FormulaBridgeTab",
-              "builtInTabId": "TabHome",
-              "groups": [
-                {
-                  "id": "FormulaBridgeGroup",
-                  "label": "FormulaBridge",
-                  "icons": [
-                    { "size": 16, "url": "assets/icon-16.png" },
-                    { "size": 32, "url": "assets/icon-32.png" },
-                    { "size": 80, "url": "assets/icon-80.png" }
-                  ],
-                  "controls": [
-                    {
-                      "id": "OpenTaskPane",
-                      "type": "button",
-                      "label": "FormulaBridge",
-                      "icons": [
-                        { "size": 16, "url": "assets/icon-16.png" },
-                        { "size": 32, "url": "assets/icon-32.png" },
-                        { "size": 80, "url": "assets/icon-80.png" }
-                      ],
-                      "supertip": {
-                        "title": "FormulaBridge",
-                        "description": "Open the FormulaBridge panel to translate formulas across languages."
-                      },
-                      "actionId": "TaskPaneAction"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
+      "scopes": ["personal"]
+    },
+    "runtimes": [
+      {
+        "id": "TaskPaneRuntime",
+        "type": "general",
+        "code": {
+          "page": "https://localhost:3000/index.html"
+        },
+        "lifetime": "long",
+        "actions": [
+          {
+            "id": "TaskPaneAction",
+            "type": "openPage",
+            "view": "view1"
+          }
+        ]
+      }
+    ],
+    "ribbons": [
+      {
+        "contexts": ["default"],
+        "tabs": [
+          {
+            "id": "FormulaBridgeTab",
+            "builtInTabId": "TabHome",
+            "groups": [
+              {
+                "id": "FormulaBridgeGroup",
+                "label": "FormulaBridge",
+                "icons": [
+                  { "size": 16, "url": "assets/icon-16.png" },
+                  { "size": 32, "url": "assets/icon-32.png" },
+                  { "size": 80, "url": "assets/icon-80.png" }
+                ],
+                "controls": [
+                  {
+                    "id": "OpenTaskPane",
+                    "type": "button",
+                    "label": "FormulaBridge",
+                    "icons": [
+                      { "size": 16, "url": "assets/icon-16.png" },
+                      { "size": 32, "url": "assets/icon-32.png" },
+                      { "size": 80, "url": "assets/icon-80.png" }
+                    ],
+                    "supertip": {
+                      "title": "FormulaBridge",
+                      "description": "Open the FormulaBridge panel to translate formulas across languages."
+                    },
+                    "actionId": "TaskPaneAction"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "authorization": {
     "permissions": {
       "resourceSpecific": []
