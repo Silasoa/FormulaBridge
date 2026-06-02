@@ -25,6 +25,7 @@
         <div class="fb-header__status" id="status-badge">
           <span class="fb-status-dot fb-status-dot--inactive"></span>
           <span class="fb-status-text">Initializing…</span>
+          <button id="help-btn" class="fb-btn-ghost" title="Help & Tutorial" style="margin-left: var(--fb-space-sm); font-size: 16px;">❓</button>
         </div>
       </header>
 
@@ -83,7 +84,35 @@
           <!-- Populated dynamically -->
         </div>
       </section>
+
+      <!-- Footer Attribution -->
+      <footer style="text-align: center; margin-top: auto; padding-top: var(--fb-space-lg); font-size: var(--fb-font-size-xs); color: var(--fb-text-muted);">
+        Disclaimer: This project was built via <strong>Vibe Coding with Antigravity</strong> as a learning project for developers. Use at your own risk. 🚀
+      </footer>
     </div>
+
+    <!-- Help Modal Dialog -->
+    <dialog id="help-modal" class="fb-modal">
+      <div class="fb-modal__header">
+        <h2 class="fb-modal__title">How to use FormulaBridge</h2>
+        <button id="close-help-btn" class="fb-btn-ghost">✕</button>
+      </div>
+      <div class="fb-modal__content">
+        <h3>1. Real-time Translation</h3>
+        <p>Type a formula in your native language (e.g., <code>=SUMME()</code> in German). When you press Enter, we automatically translate it into English (or your local language) so Excel understands it!</p>
+        
+        <h3>2. Copy-Paste Box (Foreign Formulas)</h3>
+        <p>Excel blocks formulas with foreign separators (like English commas in a German Excel). <strong>Do not paste them into the cell directly.</strong> Instead, paste them into the <em>Copy-Paste Translator</em> box here in the add-in. We'll translate them and insert them safely for you.</p>
+
+        <h3>3. Formula Reference</h3>
+        <p>Not sure what a function is called? Search our 18-language dictionary dynamically using the search bar.</p>
+
+        <div class="fb-modal__disclaimer">
+          <strong>Vibe Coding Disclaimer:</strong><br/>
+          Dieses Add-in wurde vollständig über "Vibe Coding" mit Antigravity (Google DeepMind) als Lernprojekt generiert.
+        </div>
+      </div>
+    </dialog>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -63,6 +63,12 @@ function initUI(): void {
   
   if (autoDetectToggle && sourceLangSelect) {
     // Populate source languages
+    // Add English manually since it's the base key
+    const enOption = document.createElement("fluent-option");
+    enOption.setAttribute("value", "en");
+    enOption.textContent = "English";
+    sourceLangSelect.appendChild(enOption);
+
     dictionary.meta.languages.forEach((langCode) => {
       const localeInfo = dictionary.locales[langCode];
       if (localeInfo) {
@@ -87,12 +93,14 @@ function initUI(): void {
         }
         setSourceLanguage(sourceLangSelect.value as LanguageCode);
       }
+      updateReferenceList(searchInput?.value);
     });
 
     sourceLangSelect.addEventListener("change", (e) => {
       if (!autoDetectToggle.checked) {
         setSourceLanguage(sourceLangSelect.value as LanguageCode);
       }
+      updateReferenceList(searchInput?.value);
     });
   }
 
@@ -153,15 +161,23 @@ function initUI(): void {
     referenceContainer.innerHTML = "";
     const q = query.toUpperCase();
     
+    let displaySourceLang = sourceLangSelect?.value;
+    if (displaySourceLang === "auto" || !displaySourceLang) {
+      displaySourceLang = "en";
+    }
+
     // Convert dictionary object to array
     const entries = Object.entries(dictionary.functions);
     
     // Filter
     const filtered = entries.filter(([enName, translations]) => {
-      if (!q) return true;
-      if (enName.includes(q)) return true;
-      
+      const sourceName = displaySourceLang === "en" ? enName : translations[displaySourceLang as LanguageCode];
+      if (!sourceName) return false;
+
       const localName = currentTargetLang === "en" ? enName : translations[currentTargetLang];
+      
+      if (!q) return true;
+      if (sourceName.toUpperCase().includes(q)) return true;
       if (localName && localName.toUpperCase().includes(q)) return true;
       
       return false;
@@ -171,12 +187,13 @@ function initUI(): void {
     const top = filtered.slice(0, 50);
 
     top.forEach(([enName, translations]) => {
+      const sourceName = displaySourceLang === "en" ? enName : translations[displaySourceLang as LanguageCode];
       const localName = currentTargetLang === "en" ? enName : translations[currentTargetLang];
       
       const row = document.createElement("div");
       row.className = "fb-reference__row";
       row.innerHTML = `
-        <div class="fb-reference__en">${enName}</div>
+        <div class="fb-reference__en">${sourceName}</div>
         <div class="fb-reference__local">${localName || "-"}</div>
       `;
       referenceContainer.appendChild(row);
@@ -217,7 +234,7 @@ function initUI(): void {
     entry.className = "fb-log__entry";
     
     entry.innerHTML = `
-      <div class="fb-log__cell">Cell: ${log.address} | Confidence: ${(log.confidence * 100).toFixed(0)}%</div>
+      <div class="fb-log__cell">Cell: ${log.address} | Source: ${log.sourceLanguage.toUpperCase()} | Confidence: ${(log.confidence * 100).toFixed(0)}%</div>
       <div class="fb-log__original">${log.original}</div>
       <div class="fb-log__translated">${log.translated}</div>
     `;
@@ -228,6 +245,34 @@ function initUI(): void {
       logContainer.lastElementChild?.remove();
     }
   });
+
+  // Help Modal Logic
+  const helpBtn = document.getElementById("help-btn") as HTMLButtonElement;
+  const helpModal = document.getElementById("help-modal") as HTMLDialogElement;
+  const closeHelpBtn = document.getElementById("close-help-btn") as HTMLButtonElement;
+
+  if (helpBtn && helpModal && closeHelpBtn) {
+    helpBtn.addEventListener("click", () => {
+      helpModal.showModal();
+    });
+    
+    closeHelpBtn.addEventListener("click", () => {
+      helpModal.close();
+    });
+
+    // Close on backdrop click
+    helpModal.addEventListener("click", (e) => {
+      const dialogDimensions = helpModal.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        helpModal.close();
+      }
+    });
+  }
 
   console.log("🌉 FormulaBridge: UI initialized");
 }

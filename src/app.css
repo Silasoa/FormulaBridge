@@ -364,6 +364,78 @@ fluent-switch {
 
 fluent-select {
   min-width: 140px;
-  --neutral-fill-input-rest: var(--fb-bg-primary);
+  --neutral-fill-input-rest: var(--fb-bg-surface);
+  --neutral-fill-rest: var(--fb-bg-surface);
   --neutral-foreground-rest: var(--fb-text-primary);
+  --neutral-fill-hover: var(--fb-bg-surface-hover);
+}
+
+fluent-option {
+  color: var(--fb-text-primary);
+  background: var(--fb-bg-surface);
+  padding-left: var(--fb-space-sm);
+}
+
+/* ── Help Modal ── */
+.fb-modal {
+  background: var(--fb-bg-primary);
+  color: var(--fb-text-primary);
+  border: 1px solid var(--fb-border);
+  border-radius: var(--fb-radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  max-width: 90%;
+  width: 400px;
+  margin: auto; /* centers the dialog */
+}
+
+.fb-modal::backdrop {
+  background: rgba(15, 52, 96, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.fb-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--fb-space-md) var(--fb-space-lg);
+  border-bottom: 1px solid var(--fb-border);
+  background: var(--fb-bg-secondary);
+}
+
+.fb-modal__title {
+  font-size: var(--fb-font-size-lg);
+  color: var(--fb-accent);
+}
+
+.fb-modal__content {
+  padding: var(--fb-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fb-space-sm);
+  font-size: var(--fb-font-size-sm);
+}
+
+.fb-modal__content h3 {
+  font-size: var(--fb-font-size-md);
+  color: var(--fb-text-secondary);
+  margin-top: var(--fb-space-sm);
+}
+
+.fb-modal__content code {
+  background: var(--fb-bg-surface);
+  padding: 2px 4px;
+  border-radius: var(--fb-radius-sm);
+  font-family: var(--fb-font-mono);
+  color: var(--fb-success);
+}
+
+.fb-modal__disclaimer {
+  margin-top: var(--fb-space-lg);
+  padding: var(--fb-space-md);
+  background: rgba(248, 113, 113, 0.1);
+  border-left: 3px solid var(--fb-error);
+  border-radius: var(--fb-radius-sm);
+  font-size: var(--fb-font-size-xs);
+  color: var(--fb-text-secondary);
 }

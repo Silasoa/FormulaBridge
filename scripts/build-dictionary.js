@@ -3,20 +3,15 @@ import path from 'path';
 import os from 'os';
 import { execSync } from 'child_process';
 
-// Define paths
-const workspaceDir = 'c:\\(Vibe)Code\\FormulaBridge';
+import { fileURLToPath } from 'url';
+
+// Define relative paths for security (no hardcoded absolute paths)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const workspaceDir = path.resolve(__dirname, '..');
 const existingDictPath = path.join(workspaceDir, 'src/data/dictionary.json');
-const htmlSourcePath = path.join(
-  os.homedir(),
-  '.gemini',
-  'antigravity-ide',
-  'brain',
-  '3ad093d9-88e1-4c09-80b7-a0a88efc5eab',
-  '.system_generated',
-  'steps',
-  '120',
-  'content.md'
-);
+const htmlSourcePath = path.join(__dirname, 'source.html');
 const outputDictPath = path.join(workspaceDir, 'src/data/dictionary.json');
 
 // LCID mappings to our target languages
