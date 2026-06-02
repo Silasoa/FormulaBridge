@@ -1,0 +1,369 @@
+/* ============================================================
+   FormulaBridge – Global Styles & Design Tokens
+   ============================================================ */
+
+:root {
+  /* ── Fluent-inspired Color Tokens ── */
+  --fb-bg-primary: #1a1a2e;
+  --fb-bg-secondary: #16213e;
+  --fb-bg-surface: #0f3460;
+  --fb-bg-surface-hover: #1a4a7a;
+  --fb-text-primary: #e8e8f0;
+  --fb-text-secondary: #a0a0c0;
+  --fb-text-muted: #6070a0;
+  --fb-accent: #4f6bed;
+  --fb-accent-hover: #6b83f5;
+  --fb-success: #34d399;
+  --fb-warning: #fbbf24;
+  --fb-error: #f87171;
+  --fb-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Typography ── */
+  --fb-font: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --fb-font-mono: "Cascadia Code", "Fira Code", "Consolas", monospace;
+  --fb-font-size-xs: 11px;
+  --fb-font-size-sm: 12px;
+  --fb-font-size-md: 13px;
+  --fb-font-size-lg: 16px;
+  --fb-font-size-xl: 20px;
+
+  /* ── Spacing ── */
+  --fb-space-xs: 4px;
+  --fb-space-sm: 8px;
+  --fb-space-md: 12px;
+  --fb-space-lg: 16px;
+  --fb-space-xl: 24px;
+
+  /* ── Borders & Radius ── */
+  --fb-radius-sm: 4px;
+  --fb-radius-md: 8px;
+  --fb-radius-lg: 12px;
+
+  /* ── Shadows ── */
+  --fb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --fb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fb-font);
+  font-size: var(--fb-font-size-md);
+  color: var(--fb-text-primary);
+  background: var(--fb-bg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── App Container ── */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--fb-space-md);
+  gap: var(--fb-space-md);
+}
+
+/* ── Header ── */
+.fb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--fb-space-md) var(--fb-space-lg);
+  background: linear-gradient(135deg, var(--fb-bg-surface), var(--fb-bg-secondary));
+  border-radius: var(--fb-radius-lg);
+  border: 1px solid var(--fb-border);
+  box-shadow: var(--fb-shadow-md);
+}
+
+.fb-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--fb-space-sm);
+}
+
+.fb-header__icon {
+  font-size: 24px;
+}
+
+.fb-header__title {
+  font-size: var(--fb-font-size-xl);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--fb-accent), var(--fb-success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fb-header__status {
+  display: flex;
+  align-items: center;
+  gap: var(--fb-space-xs);
+  font-size: var(--fb-font-size-sm);
+  color: var(--fb-text-secondary);
+}
+
+/* ── Status Dot ── */
+.fb-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.fb-status-dot--active {
+  background-color: var(--fb-success);
+  box-shadow: 0 0 8px var(--fb-success);
+  animation: fb-pulse 2s ease-in-out infinite;
+}
+
+.fb-status-dot--inactive {
+  background-color: var(--fb-text-muted);
+}
+
+.fb-status-dot--error {
+  background-color: var(--fb-error);
+  box-shadow: 0 0 8px var(--fb-error);
+}
+
+@keyframes fb-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Sections ── */
+.fb-section {
+  background: var(--fb-bg-secondary);
+  border-radius: var(--fb-radius-md);
+  border: 1px solid var(--fb-border);
+  padding: var(--fb-space-md);
+}
+
+.fb-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--fb-space-sm);
+}
+
+.fb-section-title {
+  font-size: var(--fb-font-size-sm);
+  font-weight: 600;
+  color: var(--fb-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Controls ── */
+.fb-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--fb-space-sm) 0;
+  border-bottom: 1px solid var(--fb-border);
+}
+
+.fb-control-row:last-child {
+  border-bottom: none;
+}
+
+.fb-label {
+  font-size: var(--fb-font-size-sm);
+  color: var(--fb-text-primary);
+  font-weight: 500;
+}
+
+/* ── Translation Log ── */
+.fb-log {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fb-space-xs);
+}
+
+.fb-log__empty {
+  text-align: center;
+  color: var(--fb-text-muted);
+  font-size: var(--fb-font-size-sm);
+  padding: var(--fb-space-xl) 0;
+  font-style: italic;
+}
+
+.fb-log__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--fb-space-sm);
+  background: var(--fb-bg-primary);
+  border-radius: var(--fb-radius-sm);
+  border-left: 3px solid var(--fb-accent);
+  font-family: var(--fb-font-mono);
+  font-size: var(--fb-font-size-xs);
+  animation: fb-slide-in 0.3s ease-out;
+}
+
+.fb-log__cell {
+  color: var(--fb-text-muted);
+  font-family: var(--fb-font);
+  font-size: var(--fb-font-size-xs);
+}
+
+.fb-log__original {
+  color: var(--fb-error);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.fb-log__translated {
+  color: var(--fb-success);
+  font-weight: 600;
+}
+
+@keyframes fb-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Search ── */
+.fb-search {
+  margin-bottom: var(--fb-space-sm);
+}
+
+.fb-search__input {
+  width: 100%;
+  padding: var(--fb-space-sm) var(--fb-space-md);
+  background: var(--fb-bg-primary);
+  border: 1px solid var(--fb-border);
+  border-radius: var(--fb-radius-sm);
+  color: var(--fb-text-primary);
+  font-family: var(--fb-font);
+  font-size: var(--fb-font-size-sm);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.fb-search__input:focus {
+  border-color: var(--fb-accent);
+  box-shadow: 0 0 0 2px rgba(79, 107, 237, 0.2);
+}
+
+.fb-search__input::placeholder {
+  color: var(--fb-text-muted);
+}
+
+/* ── Formula Reference ── */
+.fb-reference {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.fb-reference__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--fb-space-xs);
+  padding: 3px var(--fb-space-sm);
+  border-radius: var(--fb-radius-sm);
+  font-family: var(--fb-font-mono);
+  font-size: var(--fb-font-size-xs);
+  transition: background-color 0.15s ease;
+}
+
+.fb-reference__row:hover {
+  background: var(--fb-bg-surface);
+}
+
+.fb-reference__en {
+  color: var(--fb-text-secondary);
+}
+
+.fb-reference__local {
+  color: var(--fb-accent);
+  font-weight: 600;
+}
+
+/* ── Buttons ── */
+.fb-btn-primary {
+  width: 100%;
+  padding: var(--fb-space-sm) var(--fb-space-lg);
+  background: linear-gradient(135deg, var(--fb-accent), #6b83f5);
+  color: white;
+  border: none;
+  border-radius: var(--fb-radius-md);
+  font-family: var(--fb-font);
+  font-size: var(--fb-font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--fb-shadow-sm);
+}
+
+.fb-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--fb-shadow-md);
+  background: linear-gradient(135deg, var(--fb-accent-hover), #7b93ff);
+}
+
+.fb-btn-primary:active {
+  transform: translateY(0);
+}
+
+.fb-btn-ghost {
+  background: none;
+  border: none;
+  color: var(--fb-text-muted);
+  cursor: pointer;
+  padding: var(--fb-space-xs);
+  border-radius: var(--fb-radius-sm);
+  font-size: var(--fb-font-size-sm);
+  transition: all 0.15s ease;
+}
+
+.fb-btn-ghost:hover {
+  color: var(--fb-text-primary);
+  background: var(--fb-bg-surface);
+}
+
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fb-border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fb-text-muted);
+}
+
+/* ── Fluent UI Web Component Overrides ── */
+fluent-switch {
+  --accent-fill-rest: var(--fb-accent);
+  --accent-fill-hover: var(--fb-accent-hover);
+}
+
+fluent-select {
+  min-width: 140px;
+  --neutral-fill-input-rest: var(--fb-bg-primary);
+  --neutral-foreground-rest: var(--fb-text-primary);
+}

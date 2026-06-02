@@ -1,0 +1,23 @@
+{
+  "name": "formulabridge",
+  "version": "1.0.0",
+  "description": "FormulaBridge – Write Excel formulas in your language. Automatic formula translation across 18 languages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "sideload": "npx office-addin-debugging start manifest.json",
+    "build-dict": "node scripts/build-dictionary.js"
+  },
+  "devDependencies": {
+    "@types/office-js": "^1.0.0",
+    "office-addin-dev-certs": "^2.0.9",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^4.1.8"
+  }
+}
