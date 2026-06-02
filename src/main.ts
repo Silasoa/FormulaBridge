@@ -96,7 +96,7 @@ function initUI(): void {
       updateReferenceList(searchInput?.value);
     });
 
-    sourceLangSelect.addEventListener("change", (e) => {
+    sourceLangSelect.addEventListener("change", () => {
       if (!autoDetectToggle.checked) {
         setSourceLanguage(sourceLangSelect.value as LanguageCode);
       }
@@ -122,7 +122,6 @@ function initUI(): void {
       
       try {
         await Excel.run(async (context) => {
-          const sheet = context.workbook.worksheets.getActiveWorksheet();
           const range = context.workbook.getSelectedRange();
           range.load("address");
           
