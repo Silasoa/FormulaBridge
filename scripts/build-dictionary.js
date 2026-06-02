@@ -1,7 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
-import { execSync } from 'child_process';
 
 import { fileURLToPath } from 'url';
 
@@ -81,30 +79,30 @@ async function main() {
 
   while ((match = rowRegex.exec(htmlContent)) !== null) {
     const rowHtml = match[1];
-    
+
     const cells = {};
     let tdMatch;
     tdRegex.lastIndex = 0; // Reset regex
-    
+
     while ((tdMatch = tdRegex.exec(rowHtml)) !== null) {
       const lcid = parseInt(tdMatch[1], 10);
       let cellText = tdMatch[4].trim();
 
       // Clean up cell text: strip tags like <a ...>...</a>
       cellText = cellText.replace(/<[^>]+>/g, '').trim();
-      
+
       cells[lcid] = cellText;
     }
 
     if (cells[1033]) {
       const enName = cells[1033].toUpperCase();
-      
+
       if (!enName || enName === 'A' || enName === 'B' || enName === 'C' || enName === 'PRODUCT' || enName === 'SOURCE LANGUAGE') {
         continue;
       }
 
       const translations = {};
-      
+
       for (const [lcid, langCode] of Object.entries(lcidMap)) {
         if (cells[lcid]) {
           translations[langCode] = cells[lcid].trim();
