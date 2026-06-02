@@ -32,9 +32,21 @@ FormulaBridge is built to be extremely lightweight and fast. It deliberately avo
 
 ---
 
-## 📦 Installation & Sideloading
+## 📦 Deployment & Sideloading (No Store Registration Needed!)
 
-To run FormulaBridge locally in your Excel Desktop or Excel Online environment:
+FormulaBridge is hosted live at **https://formula-bridge.vercel.app**. Since it is an open-source project, you can use it without downloading any development tools or paying any Microsoft developer fees.
+
+### For Average Users (Store-Free Installation)
+1. Open [formula-bridge.vercel.app](https://formula-bridge.vercel.app) in your web browser.
+2. Click the **Download manifest.xml** button to save the manifest to your device.
+3. Open Excel (Desktop or Web), go to the **Insert** tab, click **Add-ins** > **Manage My Add-ins** > **Upload My Add-in**, and select the downloaded `manifest.xml` file.
+4. The FormulaBridge 🌉 button will appear in your Home tab ribbon!
+
+---
+
+## 🛠️ Local Development Setup
+
+If you want to run the project locally and modify the code:
 
 ### 1. Install Dependencies
 ```bash
@@ -42,27 +54,25 @@ npm install
 ```
 
 ### 2. Generate Development Certificates
-Office Add-ins require HTTPS. Generate the necessary self-signed certificates:
+Office Add-ins require HTTPS for security. Generate local certificates:
 ```bash
 npx office-addin-dev-certs install
 ```
 
-### 3. Start the Development Server
+### 3. Manifest Files
+- **`manifest.local.xml`**: Used for local development and testing. Points to `https://localhost:3000`.
+- **`manifest.xml`**: Used for production deployment. Points to the live `https://formula-bridge.vercel.app`.
+
+### 4. Start the Dev Server & Sideload
+Start the Vite server:
 ```bash
 npm run dev
 ```
-The server will start at `https://localhost:3000`.
-
-### 4. Sideload into Excel
-- **Windows Desktop**: 
-  1. Open a shared folder or network drive and place `manifest.xml` (or `manifest.json` if using M365 previews) inside.
-  2. In Excel, go to **Options > Trust Center > Trust Center Settings > Trusted Add-in Catalogs**.
-  3. Add the folder path and check "Show in Menu".
-  4. Go to **Insert > Get Add-ins > Shared Folder** and click on **FormulaBridge**.
-- **Excel Online**:
-  1. Open a blank workbook in your browser.
-  2. Go to **Insert > Add-ins > Manage My Add-ins > Upload My Add-in**.
-  3. Select the `manifest.json` or `manifest.xml` file.
+Then, sideload the local version into Excel automatically:
+```bash
+npm run sideload
+```
+*(This command automatically runs `office-addin-debugging` using `manifest.local.xml`)*
 
 ---
 

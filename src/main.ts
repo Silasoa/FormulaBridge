@@ -12,15 +12,41 @@ const dictionary = dictionaryData as unknown as Dictionary;
 
 // Wait for Office.js to be ready before initializing
 Office.onReady((info) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isDemoMode = urlParams.get("demo") === "true";
+
   if (info.host === Office.HostType.Excel) {
     console.log("🌉 FormulaBridge: Office.js ready, host is Excel");
     initApp();
-  } else {
-    console.warn("🌉 FormulaBridge: Not running in Excel, host:", info.host);
-    // Initialize anyway for browser testing
+  } else if (isDemoMode) {
+    console.log("🌉 FormulaBridge: Standalone web demo mode active");
     initApp();
+  } else {
+    console.log("🌉 FormulaBridge: Standalone landing page mode");
+    showLandingPage();
   }
 });
+
+function showLandingPage(): void {
+  const landingPage = document.getElementById("landing-page");
+  const appContainer = document.getElementById("app");
+  if (landingPage && appContainer) {
+    landingPage.style.display = "flex";
+    appContainer.style.display = "none";
+  }
+
+  const launchDemoBtn = document.getElementById("launch-demo-btn");
+  if (launchDemoBtn) {
+    launchDemoBtn.addEventListener("click", () => {
+      if (landingPage && appContainer) {
+        landingPage.style.display = "none";
+        appContainer.style.display = "flex";
+        initApp();
+      }
+    });
+  }
+}
+
 
 let currentTargetLang: LanguageCode = "en";
 

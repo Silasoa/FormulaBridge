@@ -15,6 +15,49 @@
     <link rel="stylesheet" href="/src/app.css" />
   </head>
   <body>
+    <!-- Standalone Landing Page -->
+    <div id="landing-page" class="fb-landing" style="display: none;">
+      <div class="fb-landing__card">
+        <div class="fb-landing__header">
+          <span class="fb-landing__logo">🌉</span>
+          <h1 class="fb-landing__title">FormulaBridge</h1>
+          <p class="fb-landing__subtitle">The modern Excel Formula Translator across 18 languages</p>
+        </div>
+        
+        <div class="fb-landing__body">
+          <p style="margin-bottom: var(--fb-space-lg); color: var(--fb-text-secondary); line-height: 1.6;">
+            FormulaBridge translates function names (like <code>SUM</code> to <code>SUMME</code>) and separators (like commas to semicolons) dynamically. Since this is a free, open-source project, you can sideload it in Excel completely for free without any registration or AppSource Store fees!
+          </p>
+
+          <div class="fb-landing__actions">
+            <a href="/manifest.xml" download="manifest.xml" class="fb-btn-primary fb-landing__download-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: bold; width: 100%;">
+              📥 Download manifest.xml
+            </a>
+            <button id="launch-demo-btn" class="fb-btn-ghost" style="width: 100%; border: 1px solid var(--fb-border); margin-top: var(--fb-space-sm);">
+              💻 Try Web Demo in Browser
+            </button>
+          </div>
+
+          <h3 style="margin-top: var(--fb-space-xl); margin-bottom: var(--fb-space-sm); font-size: var(--fb-font-size-lg); border-bottom: 1px solid var(--fb-border); padding-bottom: var(--fb-space-xs);">How to Add to Excel (3 Simple Steps)</h3>
+          <ol class="fb-landing__steps" style="margin-left: var(--fb-space-lg); line-height: 1.6; color: var(--fb-text-secondary); display: flex; flex-direction: column; gap: var(--fb-space-sm);">
+            <li>
+              <strong>Download:</strong> Click the button above to download the <code>manifest.xml</code> file to your device.
+            </li>
+            <li>
+              <strong>Upload:</strong> Open Excel (Desktop or Web), go to the <strong>Insert</strong> tab, select <strong>Add-ins</strong> > <strong>Manage My Add-ins</strong> > <strong>Upload My Add-in</strong>.
+            </li>
+            <li>
+              <strong>Use:</strong> Select the downloaded file. The FormulaBridge 🌉 icon will instantly appear in your Home ribbon!
+            </li>
+          </ol>
+        </div>
+        
+        <footer style="margin-top: var(--fb-space-xl); text-align: center; font-size: var(--fb-font-size-xs); color: var(--fb-text-muted);">
+          Built via <strong>Vibe Coding with Antigravity</strong> (Google DeepMind) as an open-source learning project.
+        </footer>
+      </div>
+    </div>
+
     <div id="app">
       <!-- Header -->
       <header class="fb-header">
