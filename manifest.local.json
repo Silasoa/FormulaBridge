@@ -5,17 +5,17 @@
   "id": "f1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "developer": {
     "name": "FormulaBridge",
-    "websiteUrl": "https://formula-bridge.vercel.app",
-    "privacyUrl": "https://formula-bridge.vercel.app/privacy",
-    "termsOfUseUrl": "https://formula-bridge.vercel.app/terms"
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/terms"
   },
   "name": {
-    "short": "FormulaBridge",
-    "full": "FormulaBridge – Excel Formula Translator"
+    "short": "FormulaBridge (Local)",
+    "full": "FormulaBridge – Excel Formula Translator (Local)"
   },
   "description": {
     "short": "Write Excel formulas in any language",
-    "full": "FormulaBridge automatically translates Excel formulas between 18 languages. Type =SUMME(A1:A10) in an English Excel, =SOMME(A1:A10) in a German one – FormulaBridge translates instantly. Supports auto-detection, mixed languages, and batch translation."
+    "full": "FormulaBridge automatically translates Excel formulas between 18 languages. Type =SUMME(A1:A10) in an English Excel, =SOMME(A1:A10) in a German one – FormulaBridge translates instantly."
   },
   "icons": {
     "outline": "assets/icon-32.png",
@@ -37,7 +37,7 @@
         "id": "TaskPaneRuntime",
         "type": "general",
         "code": {
-          "page": "https://formula-bridge.vercel.app/index.html"
+          "page": "https://localhost:3000/index.html"
         },
         "lifetime": "long",
         "actions": [
@@ -94,5 +94,5 @@
       "resourceSpecific": []
     }
   },
-  "validDomains": ["localhost", "formula-bridge.vercel.app"]
+  "validDomains": ["localhost"]
 }
